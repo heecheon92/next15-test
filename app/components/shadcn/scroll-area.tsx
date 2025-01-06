@@ -19,7 +19,7 @@ interface ScrollAreaViewportProps
 }
 
 const ScrollArea = React.forwardRef<
-  React.ElementRef<typeof ScrollAreaPrimitive.Root>,
+  React.ComponentRef<typeof ScrollAreaPrimitive.Root>,
   ScrollAreaViewportProps
 >(
   (
@@ -32,7 +32,7 @@ const ScrollArea = React.forwardRef<
       children,
       ...props
     },
-    ref,
+    ref
   ) => (
     <ScrollAreaPrimitive.Root
       ref={ref}
@@ -55,7 +55,7 @@ const ScrollArea = React.forwardRef<
       )}
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
-  ),
+  )
 );
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
@@ -70,7 +70,7 @@ interface ScrollBarProps
 }
 
 const ScrollBar = React.forwardRef<
-  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
+  React.ComponentRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
   Omit<ScrollBarProps, "className">
 >(({ classNames, orientation = "vertical", ...props }, ref) => (
   <ScrollAreaPrimitive.ScrollAreaScrollbar
@@ -83,14 +83,14 @@ const ScrollBar = React.forwardRef<
         "h-full w-2.5 border-l border-l-transparent p-[1px]",
       orientation === "horizontal" &&
         "h-2.5 flex-col border-t border-t-transparent p-[1px]",
-      classNames?.bar,
+      classNames?.bar
     )}
     {...props}
   >
     <ScrollAreaPrimitive.ScrollAreaThumb
       className={cn(
         "relative flex-1 rounded-full bg-color-fade-gray",
-        classNames?.thumb,
+        classNames?.thumb
       )}
     />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>

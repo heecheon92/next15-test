@@ -71,21 +71,18 @@ function Calendar({
           buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
-        nav_button_previous: cn(
-          "absolute left-1",
-          classNames?.nav_button_previous
-        ),
-        nav_button_next: cn("absolute right-1", classNames?.nav_button_next),
-        table: cn("w-full border-collapse space-y-1", classNames?.table),
-        head_row: cn("flex text-center", classNames?.head_row),
+        nav_button_previous: cn("absolute left-1", classNames?.button_previous),
+        nav_button_next: cn("absolute right-1", classNames?.button_next),
+        table: cn("w-full border-collapse space-y-1", classNames?.month_grid),
+        head_row: cn("flex text-center", classNames?.weekdays),
         head_cell: cn(
           "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
-          classNames?.head_cell
+          classNames?.weekday
         ),
-        row: cn("flex w-full mt-2", classNames?.row),
+        row: cn("flex w-full mt-2", classNames?.week),
         cell: cn(
           "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected])]:bg-blue-100/30 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-          classNames?.cell
+          classNames?.day
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
@@ -94,25 +91,25 @@ function Calendar({
         ),
         day_selected: cn(
           "bg-blue-300 text-primary-foreground hover:bg-blue-300 hover:text-primary-foreground focus:bg-blue-300 focus:text-primary-foreground",
-          classNames?.day_selected
+          classNames?.selected
         ),
         day_today: cn(
           "bg-blue-100/30 text-accent-foreground",
-          classNames?.day_today
+          classNames?.today
         ),
         day_outside: cn(
           "text-muted-foreground opacity-50",
-          classNames?.day_outside
+          classNames?.outside
         ),
         day_disabled: cn(
           "text-muted-foreground opacity-50",
-          classNames?.day_disabled
+          classNames?.disabled
         ),
         day_range_middle: cn(
           "aria-selected:bg-blue-100/30 aria-selected:text-accent-foreground",
-          classNames?.day_range_middle
+          classNames?.range_middle
         ),
-        day_hidden: cn("invisible", classNames?.day_hidden),
+        day_hidden: cn("invisible", classNames?.hidden),
       }}
       components={{
         Dropdown: components?.Dropdown ?? CalendarDropdown,
@@ -134,12 +131,12 @@ Calendar.displayName = "Calendar";
  */
 function CalendarDayContent(props: DayProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <td>
       <span className="text-sm">{props.day.date.getDate()}</span>
       {props.modifiers?.events && (
         <div className="absolute -bottom-1.5 h-1 w-1 rounded-full bg-S-600"></div>
       )}
-    </div>
+    </td>
   );
 }
 

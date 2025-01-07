@@ -9,7 +9,7 @@ export default function AutoMemoMain() {
 
   return (
     <Fragment>
-      <header className="text-2xl font-bold">Auto Memo</header>
+      <header className="text-2xl font-bold">Auto Memo (React Compiler)</header>
 
       <Button onClick={() => setCount((c) => c + 1)}>
         Clicked {count} times

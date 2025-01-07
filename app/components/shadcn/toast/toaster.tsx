@@ -1,10 +1,10 @@
 "use client";
 
-import { useClassNames } from "@/app/common/hooks/useClassNames";
 import { cn } from "@/lib/utils";
-import { DotLottiePlayer } from "@dotlottie/react-player";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useMemo } from "react";
 
+import { useClassNames } from "@/app/hooks/useClassNames";
 import {
   Toast,
   ToastClose,
@@ -28,7 +28,7 @@ export function Toaster() {
             {...props}
             className={cn(
               props.className,
-              "m-0 my-2 w-[343px] flex-shrink p-0",
+              "m-0 my-2 w-[343px] flex-shrink p-0"
             )}
           >
             <div className="flex w-full flex-row items-center justify-start p-[17px] pl-2">
@@ -73,7 +73,7 @@ function ToasterLottiePlayer(props: Pick<ToasterToast, "variant">) {
 
   return (
     <>
-      <DotLottiePlayer className={cn(cns.toast.icon)} src={src} autoplay />
+      <DotLottieReact className={cn(cns.toast.icon)} src={src} autoplay />
     </>
   );
 }

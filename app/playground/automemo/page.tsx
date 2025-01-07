@@ -20,6 +20,10 @@ export default function AutoMemoMain() {
 }
 
 function SomeChildComponent() {
+  /**
+   * This component does not rerender when parent's state changes
+   * because React Compiler automatically memoizes it.
+   */
   log("SomeChildComponent rendered");
   return <div>Some child component</div>;
 }

@@ -32,7 +32,7 @@ import { AlertDialogContent } from "@radix-ui/react-alert-dialog";
 export default function ShadcnMain() {
   return (
     <div className="flex flex-col space-y-4 w-full min-h-screen p-4 bg-gray-100">
-      <header>Shadcn</header>
+      <header className="text-2xl font-bold">Shadcn</header>
       <ComponentSection title="Input">
         <Input />
       </ComponentSection>

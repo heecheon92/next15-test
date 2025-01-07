@@ -8,7 +8,7 @@ export default function AutoMemoMain() {
 
   return (
     <div className="flex flex-col space-y-4 w-full min-h-screen p-4 bg-gray-100">
-      <header>Auto Memo</header>
+      <header className="text-2xl font-bold">Auto Memo</header>
 
       <button onClick={() => setCount((c) => c + 1)}>
         Clicked {count} times

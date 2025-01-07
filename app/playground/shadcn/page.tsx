@@ -23,6 +23,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/app/components/shadcn/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/app/components/shadcn/drawer";
 import { Input } from "@/app/components/shadcn/input";
 import {
   Popover,
@@ -98,6 +108,26 @@ export default function ShadcnMain() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+      </ComponentSection>
+
+      <ComponentSection title="Drawer">
+        <Drawer>
+          <DrawerTrigger>Open Drawer</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+              <DrawerDescription>
+                This action cannot be undone.
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </ComponentSection>
     </div>
   );

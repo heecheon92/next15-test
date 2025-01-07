@@ -172,7 +172,7 @@ function ComponentSection({
   );
 }
 
-export function CommandMenu({ keyboardKey }: { keyboardKey: string }) {
+function CommandMenu({ keyboardKey }: { keyboardKey: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

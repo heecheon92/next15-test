@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import unusedImports from "eslint-plugin-unused-imports";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -12,6 +13,9 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    plugins: {
+      "unused-imports": unusedImports,
+    },
     rules: {
       /* 0: off, 1: warn, 2: error */
       "no-unused-vars": "off",

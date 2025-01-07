@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/playground",
+        destination: "/playground/automemo",
+        permanent: true,
+      }
+    ]
+  }
 };
 
 export default nextConfig;

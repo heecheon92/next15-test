@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import NextTopLoader from "nextjs-toploader";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         vaul-drawer-wrapper=""
       >
+        <NextTopLoader color="#1CD28C" height={5} showSpinner={false} />
         {children}
       </body>
     </html>

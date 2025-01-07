@@ -1,7 +1,9 @@
+"use client";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
@@ -27,7 +29,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/app/components/shadcn/popover";
-import { AlertDialogContent } from "@radix-ui/react-alert-dialog";
 
 export default function ShadcnMain() {
   return (
@@ -88,6 +89,9 @@ export default function ShadcnMain() {
                 account and remove your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
+
+            <span>Some content</span>
+
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction>Continue</AlertDialogAction>

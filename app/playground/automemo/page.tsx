@@ -15,16 +15,27 @@ export default function AutoMemoMain() {
         Clicked {count} times
       </Button>
 
-      <SomeChildComponent />
+      <AutoMemoizedChildComponent />
+
+      <ChildComponentWithProps count={count} />
     </div>
   );
 }
 
-function SomeChildComponent() {
+function AutoMemoizedChildComponent() {
   /**
    * This component does not rerender when parent's state changes
    * because React Compiler automatically memoizes it.
    */
   log("SomeChildComponent rendered");
   return <div>Some child component</div>;
+}
+
+function ChildComponentWithProps({ count }: { count: number }) {
+  /**
+   * This component does rerender when parent's state changes
+   * because it references parent's state.
+   */
+  log("ChildComponentWithProps rendered");
+  return <div>Child component with props: {count}</div>;
 }

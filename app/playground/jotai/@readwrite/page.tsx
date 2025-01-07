@@ -16,7 +16,7 @@ export default function JotaiReadWrite() {
   const [readwriteCount, setReadwriteCount] = useAtom(readwriteCountAtom);
   const [count, setCount] = useAtom(countAtom);
 
-  log("JotaiReadWrite rerendered");
+  log("ReadWrite rerendered");
 
   return (
     <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">

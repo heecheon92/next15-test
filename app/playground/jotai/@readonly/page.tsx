@@ -12,7 +12,7 @@ export default function JotaiReadonly() {
   const [readonlyCount] = useAtom(readonlyCountAtom);
   const anotherReadonlyCount = useAtomValue(countAtom);
 
-  log("JotaiReadonly rerendered");
+  log("Readonly rerendered");
 
   return (
     <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">

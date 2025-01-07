@@ -17,7 +17,7 @@ export default function JotaiWriteonly() {
   const [, setWriteonlyCount] = useAtom(writeonlyCountAtom);
   const setAnotherWriteonlyCount = useSetAtom(countAtom);
 
-  log("JotaiWriteonly rerendered");
+  log("Writeonly rerendered");
 
   return (
     <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">

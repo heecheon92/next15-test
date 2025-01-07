@@ -10,7 +10,7 @@ export default function JotaiPrimitive() {
   const [text, setText] = useAtom(textAtom);
   const [object, setObject] = useAtom(objectAtom);
 
-  log("JotaiPrimitive rerendered");
+  log("Primitive rerendered");
 
   return (
     <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">

@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/app/components/shadcn/button";
 import { log } from "@/app/util/logger";
 import { useState } from "react";
 
@@ -10,9 +11,9 @@ export default function AutoMemoMain() {
     <div className="flex flex-col space-y-4 w-full min-h-screen p-4 bg-gray-100">
       <header className="text-2xl font-bold">Auto Memo</header>
 
-      <button onClick={() => setCount((c) => c + 1)}>
+      <Button onClick={() => setCount((c) => c + 1)}>
         Clicked {count} times
-      </button>
+      </Button>
 
       <SomeChildComponent />
     </div>

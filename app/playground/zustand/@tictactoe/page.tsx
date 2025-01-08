@@ -30,6 +30,7 @@ type GameActions = {
       | Array<BoardRow>
       | ((prevHistory: Array<BoardRow>) => Array<BoardRow>)
   ) => void;
+  resetGame: () => void;
   setCurrentMove: (
     nextCurrentMove: number | ((prevMove: number) => number)
   ) => void;
@@ -49,6 +50,9 @@ const useGameStore = create(
               ? nextHistory(state.history)
               : nextHistory,
         }));
+      },
+      resetGame: () => {
+        set({ history: [Array(9).fill(null)], currentMove: 0 });
       },
       setCurrentMove: (nextCurrentMove) => {
         set((state) => ({
@@ -124,7 +128,8 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
 
 function Game() {
   const renderCount = useRenderCount();
-  const { history, setHistory, currentMove, setCurrentMove } = useGameStore();
+  const { history, setHistory, currentMove, setCurrentMove, resetGame } =
+    useGameStore();
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -135,7 +140,8 @@ function Game() {
   }
 
   function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
+    if (nextMove === 0) resetGame();
+    else setCurrentMove(nextMove);
   }
 
   return (

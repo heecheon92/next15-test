@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/app/components/shadcn/button";
 import { useRenderCount } from "@/app/util/render";
 import { cn } from "@/lib/utils";
 import { create } from "zustand";
@@ -34,6 +35,7 @@ type GameActions = {
   setCurrentMove: (
     nextCurrentMove: number | ((prevMove: number) => number)
   ) => void;
+  jumpTo: (nextMove: number) => void;
 };
 
 const useGameStore = create(
@@ -61,6 +63,11 @@ const useGameStore = create(
               ? nextCurrentMove(state.currentMove)
               : nextCurrentMove,
         }));
+      },
+      jumpTo: (nextMove) => {
+        if (nextMove === 0)
+          set({ history: [Array(9).fill(null)], currentMove: 0 });
+        else set({ currentMove: nextMove });
       },
     })
   )
@@ -93,6 +100,7 @@ type BoardProps = {
 };
 
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
+  const renderCount = useRenderCount();
   const winner = calculateWinner(squares);
   const turns = calculateTurns(squares);
   const player = xIsNext ? "X" : "O";
@@ -106,7 +114,8 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
   }
 
   return (
-    <>
+    <section className="flex flex-col space-y-4 border-2 rounded-md p-4 border-green-300">
+      <header className="font-semibold">{`Board (rendered ${renderCount} times)`}</header>
       <div className="mb-[0.5rem]">{status}</div>
       <div
         className={cn(
@@ -122,14 +131,73 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
           />
         ))}
       </div>
-    </>
+    </section>
+  );
+}
+
+function History() {
+  const renderCount = useRenderCount();
+  const { history, jumpTo } = useGameStore();
+  return (
+    <section className="flex flex-col space-y-4 border-2 rounded-md p-4 border-green-300">
+      <header className="font-semibold">{`History (rendered ${renderCount} times)`}</header>
+      <ol>
+        {history.map((_, historyIndex) => {
+          const description =
+            historyIndex > 0
+              ? `Go to move #${historyIndex}`
+              : "Go to game start";
+
+          return (
+            <li key={historyIndex}>
+              <button onClick={() => jumpTo(historyIndex)}>
+                {description}
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
+
+function ControlPanelFullStore() {
+  const renderCount = useRenderCount();
+  const { resetGame } = useGameStore();
+  return (
+    <section className="flex flex-col space-y-4 border-2 rounded-md p-4 border-green-300 w-[300px]">
+      <header className="font-semibold">{`ControlPanel (rendered ${renderCount} times)`}</header>
+      <p className="font-semibold">{`useGameStore()`}</p>
+      <Button onClick={resetGame}>Reset Game</Button>
+      <footer className="text-sm font-bold whitespace-pre-wrap">
+        {
+          "This component re-renders even though it is not directly referencing the state object. This is a problem because a developer may not be aware that a component is re-rendering unnecessarily."
+        }
+      </footer>
+    </section>
+  );
+}
+
+function ControlPanelFullStoreWithSelector() {
+  const renderCount = useRenderCount();
+  const resetGame = useGameStore((state) => state.resetGame);
+  return (
+    <section className="flex flex-col space-y-4 border-2 rounded-md p-4 border-green-300 w-[400px]">
+      <header className="font-semibold">{`ControlPanel (rendered ${renderCount} times)`}</header>
+      <p className="font-semibold">{`useGameStore(state => state.resetGame)`}</p>
+      <Button onClick={resetGame}>Reset Game</Button>
+      <footer className="text-sm font-bold whitespace-pre-wrap">
+        {
+          "Luckily, Zustand provides a way to avoid this problem by using a selector-like behavior. This way, the component will only re-render when the selected state changes."
+        }
+      </footer>
+    </section>
   );
 }
 
 function Game() {
   const renderCount = useRenderCount();
-  const { history, setHistory, currentMove, setCurrentMove, resetGame } =
-    useGameStore();
+  const { history, setHistory, currentMove, setCurrentMove } = useGameStore();
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -139,16 +207,11 @@ function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove: number) {
-    if (nextMove === 0) resetGame();
-    else setCurrentMove(nextMove);
-  }
-
   return (
-    <div className="flex flex-col">
-      <header className="font-semibold">{`Board (rendered ${renderCount} times)`}</header>
+    <div className="flex flex-col border-2 rounded-md border-rose-600 p-4 space-y-4">
+      <header className="font-semibold">{`Game (rendered ${renderCount} times)`}</header>
 
-      <div className="flex flex-row">
+      <div className="flex flex-row space-x-4">
         <div>
           <Board
             xIsNext={xIsNext}
@@ -156,24 +219,15 @@ function Game() {
             onPlay={handlePlay}
           />
         </div>
-        <div className="ml-[1rem]">
-          <ol>
-            {history.map((_, historyIndex) => {
-              const description =
-                historyIndex > 0
-                  ? `Go to move #${historyIndex}`
-                  : "Go to game start";
-
-              return (
-                <li key={historyIndex}>
-                  <button onClick={() => jumpTo(historyIndex)}>
-                    {description}
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
+        <div>
+          <History />
         </div>
+      </div>
+
+      <div className="flex flex-row space-x-4">
+        <ControlPanelFullStore />
+
+        <ControlPanelFullStoreWithSelector />
       </div>
     </div>
   );

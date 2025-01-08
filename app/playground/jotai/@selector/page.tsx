@@ -2,7 +2,7 @@
 
 import { Button } from "@/app/components/shadcn/button";
 import { useRenderCount } from "@/app/util/render";
-import { useAtom } from "jotai";
+import { atom, useAtom } from "jotai";
 import { objectAtom } from "../atoms";
 
 export default function JotaiSelector() {
@@ -10,7 +10,7 @@ export default function JotaiSelector() {
   const [object, setObject] = useAtom(objectAtom);
 
   return (
-    <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">
+    <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md border-black">
       <header className="text-lg font-bold">{`Selector (rendered ${renderCount} times)`}</header>
 
       <div className="flex flex-col space-y-2">
@@ -29,6 +29,58 @@ export default function JotaiSelector() {
           Change Object Fields
         </Button>
       </div>
+      <footer className="flex flex-row justify-evenly">
+        <ObjectGreetingSelector />
+        <ObjectNameSelector />
+      </footer>
+    </div>
+  );
+}
+
+const greetingAtom = atom(
+  (get) => get(objectAtom).greeting,
+  (_get, set, arg: "Hello" | "Bye") => {
+    set(objectAtom, (prev) => ({ ...prev, greeting: arg }));
+  }
+);
+function ObjectGreetingSelector() {
+  const renderCount = useRenderCount();
+  const [greeting, setGreeting] = useAtom(greetingAtom);
+
+  return (
+    <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
+      <header className="text-xl font-bold">{`Object Greeting (inner child / rendered ${renderCount} times)`}</header>
+      <div>
+        <span className="font-bold">Greeting:</span> {greeting}
+      </div>
+      <Button
+        onClick={() => setGreeting(greeting === "Hello" ? "Bye" : "Hello")}
+      >
+        Set Greeting
+      </Button>
+    </div>
+  );
+}
+
+const nameAtom = atom(
+  (get) => get(objectAtom).name,
+  (_get, set, arg: "React" | "Jotai") => {
+    set(objectAtom, (prev) => ({ ...prev, name: arg }));
+  }
+);
+function ObjectNameSelector() {
+  const renderCount = useRenderCount();
+  const [name, setName] = useAtom(nameAtom);
+
+  return (
+    <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
+      <header className="text-xl font-bold">{`Object Name (inner child / rendered ${renderCount} times)`}</header>
+      <div>
+        <span className="font-bold">Name:</span> {name}
+      </div>
+      <Button onClick={() => setName(name === "React" ? "Jotai" : "React")}>
+        Set Name
+      </Button>
     </div>
   );
 }

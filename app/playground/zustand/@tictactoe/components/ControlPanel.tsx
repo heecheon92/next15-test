@@ -19,6 +19,11 @@ export function ControlPanelFullStore() {
   );
 }
 
+/**
+ *  This component does not re-render when history or move state changes. (optimized)
+ *
+ *  https://github.com/pmndrs/zustand/issues/103
+ */
 export function ControlPanelStoreSelector() {
   const renderCount = useRenderCount();
   const resetGame = useGameStore((state) => state.resetGame);

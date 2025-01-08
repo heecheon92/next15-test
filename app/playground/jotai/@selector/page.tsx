@@ -49,7 +49,7 @@ function ObjectGreetingSelector() {
 
   return (
     <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
-      <header className="text-xl font-bold">{`Object Greeting (inner child / rendered ${renderCount} times)`}</header>
+      <header className="text-xl font-bold">{`Object Greeting (child / rendered ${renderCount} times)`}</header>
       <div>
         <span className="font-bold">Greeting:</span> {greeting}
       </div>
@@ -74,7 +74,7 @@ function ObjectNameSelector() {
 
   return (
     <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
-      <header className="text-xl font-bold">{`Object Name (inner child / rendered ${renderCount} times)`}</header>
+      <header className="text-xl font-bold">{`Object Name (child / rendered ${renderCount} times)`}</header>
       <div>
         <span className="font-bold">Name:</span> {name}
       </div>

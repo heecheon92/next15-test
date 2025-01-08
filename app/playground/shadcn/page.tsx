@@ -69,7 +69,7 @@ export default function ShadcnMain() {
       </ComponentSection>
 
       <ComponentSection title="Calendar">
-        <Calendar />
+        <CalendarDayPicker />
       </ComponentSection>
 
       <ComponentSection title="Checkbox">
@@ -242,4 +242,10 @@ function CommandMenu({ keyboardKey }: { keyboardKey: string }) {
       </CommandDialog>
     </div>
   );
+}
+
+function CalendarDayPicker() {
+  const [date, setDate] = useState(new Date());
+
+  return <Calendar mode="single" selected={date} onSelect={setDate} required />;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/app/components/shadcn/button";
-import { log } from "@/app/util/logger";
+import { useRenderCount } from "@/app/util/render";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { countAtom } from "../atoms";
 
@@ -10,6 +10,7 @@ const writeonlyCountAtom = atom(null, (get, set) => {
 });
 
 export default function JotaiWriteonly() {
+  const renderCount = useRenderCount();
   /**
    * roles of the following two state setters are virtually identical.
    * Setting states with following functions will not trigger rerender of this component.
@@ -17,11 +18,9 @@ export default function JotaiWriteonly() {
   const [, setWriteonlyCount] = useAtom(writeonlyCountAtom);
   const setAnotherWriteonlyCount = useSetAtom(countAtom);
 
-  log("Writeonly rerendered");
-
   return (
     <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">
-      <header className="text-lg font-bold">Write Only</header>
+      <header className="text-lg font-bold">{`Write Only (rendered ${renderCount} times)`}</header>
 
       <Button onClick={() => setWriteonlyCount()}>
         Increment Writeonly Count

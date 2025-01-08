@@ -1,16 +1,15 @@
 "use client";
 import { Button } from "@/app/components/shadcn/button";
 import { useSesameRouter } from "@/app/hooks/useSesameRouter";
-import { log } from "@/app/util/logger";
+import { useRenderCount } from "@/app/util/render";
 import { cn } from "@/lib/utils";
 import { useAtom } from "jotai";
 import { darkModeAtom } from "../atoms";
 
 export default function JotaiPersistence() {
+  const renderCount = useRenderCount();
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
   const router = useSesameRouter();
-
-  log("Persistence rerendered");
 
   return (
     <div
@@ -19,7 +18,7 @@ export default function JotaiPersistence() {
         darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
       )}
     >
-      <header className="text-lg font-bold">Persistence</header>
+      <header className="text-lg font-bold">{`Persistence (rendered ${renderCount} times)`}</header>
 
       <div>
         <span className="font-bold">Is DarkMode:</span> {darkMode}

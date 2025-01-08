@@ -1,20 +1,19 @@
 "use client";
 
 import { Button } from "@/app/components/shadcn/button";
-import { log } from "@/app/util/logger";
+import { useRenderCount } from "@/app/util/render";
 import { useAtom, useAtomValue } from "jotai";
 import { countAtom, objectAtom, textAtom } from "../atoms";
 
 export default function JotaiPrimitive() {
+  const renderCount = useRenderCount();
   const [count, setCount] = useAtom(countAtom);
   const [text, setText] = useAtom(textAtom);
   const [object, setObject] = useAtom(objectAtom);
 
-  log("Primitive rerendered");
-
   return (
-    <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md">
-      <header className="text-lg font-bold">Primitive</header>
+    <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md border-black">
+      <header className="text-lg font-bold">{`Primitive (rendered ${renderCount} times)`}</header>
 
       <div className="flex flex-col space-y-2">
         <div>
@@ -68,26 +67,58 @@ export default function JotaiPrimitive() {
 }
 
 function PrimitiveSummary() {
+  const renderCount = useRenderCount();
+
+  return (
+    <div className="flex flex-col space-y-4 w-full p-4 bg-gray-100 border-2 border-red-300 rounded-md">
+      <header className="text-2xl font-bold">{`Summary (top level child / rendered ${renderCount} times)`}</header>
+      <div className="flex flex-row w-full justify-between">
+        <PrimitiveCount />
+        <PrimitiveText />
+        <PrimitiveObject />
+      </div>
+    </div>
+  );
+}
+
+function PrimitiveCount() {
+  const renderCount = useRenderCount();
   const count = useAtomValue(countAtom);
+
+  return (
+    <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
+      <header className="text-xl font-bold">{`Count (inner child / rendered ${renderCount} times)`}</header>
+      <div>
+        <span className="font-bold">Count:</span> {count}
+      </div>
+    </div>
+  );
+}
+
+function PrimitiveText() {
+  const renderCount = useRenderCount();
   const text = useAtomValue(textAtom);
+
+  return (
+    <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
+      <header className="text-xl font-bold">{`Text (inner child / rendered ${renderCount} times)`}</header>
+      <div>
+        <span className="font-bold">Text:</span> {text}
+      </div>
+    </div>
+  );
+}
+
+function PrimitiveObject() {
+  const renderCount = useRenderCount();
   const object = useAtomValue(objectAtom);
 
   return (
-    <div className="flex flex-col space-y-4 w-full p-4 bg-gray-100">
-      <header className="text-2xl font-bold">
-        Summary (This is a child component)
-      </header>
-      <div className="flex flex-row w-full justify-between">
-        <div>
-          <span className="font-bold">Count:</span> {count}
-        </div>
-        <div>
-          <span className="font-bold">Text:</span> {text}
-        </div>
-        <div>
-          <span className="font-bold">Object:</span>
-          <pre>{JSON.stringify(object, null, 2)}</pre>
-        </div>
+    <div className="flex flex-col space-y-4 p-4 bg-gray-100 border-2 border-green-300 rounded-md">
+      <header className="text-xl font-bold">{`Object (inner child / rendered ${renderCount} times)`}</header>
+      <div>
+        <span className="font-bold">Object:</span>
+        <pre>{JSON.stringify(object, null, 2)}</pre>
       </div>
     </div>
   );

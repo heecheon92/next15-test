@@ -6,6 +6,7 @@ export default function Home() {
       <Link href="/playground/shadcn">Shadcn</Link>
       <Link href="/playground/jotai">Jotai</Link>
       <Link href="/playground/automemo">Auto Memo (React Compiler)</Link>
+      <Link href="/playground/zustand">Zustand</Link>
     </div>
   );
 }

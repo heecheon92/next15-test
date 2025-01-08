@@ -58,6 +58,9 @@ function ObjectGreetingSelector() {
       >
         Set Greeting
       </Button>
+      <footer className="text-sm">
+        {"Setting 'greeting' does not affect ObjectName component on the right"}
+      </footer>
     </div>
   );
 }
@@ -81,6 +84,9 @@ function ObjectNameSelector() {
       <Button onClick={() => setName(name === "React" ? "Jotai" : "React")}>
         Set Name
       </Button>
+      <footer className="text-sm">
+        {"Setting 'name' does not affect ObjectGreeting component on the left"}
+      </footer>
     </div>
   );
 }

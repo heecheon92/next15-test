@@ -1,0 +1,1 @@
+export type StateOrUpdater<T> = T | ((prev: T) => T)

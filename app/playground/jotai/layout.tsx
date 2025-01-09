@@ -3,6 +3,7 @@ export default function JotaiLayout({
   persistence,
   primitive,
   selector,
+  deepselector,
   readonly,
   readwrite,
   writeonly,
@@ -11,6 +12,7 @@ export default function JotaiLayout({
   persistence: React.ReactNode;
   primitive: React.ReactNode;
   selector: React.ReactNode;
+  deepselector: React.ReactNode;
   readonly: React.ReactNode;
   readwrite: React.ReactNode;
   writeonly: React.ReactNode;
@@ -21,6 +23,7 @@ export default function JotaiLayout({
       {persistence}
       {primitive}
       {selector}
+      {deepselector}
       {readonly}
       {writeonly}
       {readwrite}

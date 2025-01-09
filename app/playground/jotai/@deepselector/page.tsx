@@ -11,7 +11,10 @@ export default function JotaiSelector() {
   const [object, setObject] = useAtom(deepObjectAtom);
 
   return (
-    <div className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md border-black">
+    <div
+      className="flex flex-col space-y-4 w-full h-full p-4 bg-gray-100 border-2 rounded-md border-black"
+      id="deep-selector"
+    >
       <header className="text-lg font-bold">{`Deep Selector (rendered ${renderCount} times)`}</header>
 
       <div className="flex flex-col space-y-2">

@@ -9,10 +9,12 @@ export default function ProgressPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev < 100) {
-          return prev + 10;
+        if (prev < 30) {
+          return prev + 30;
+        } else if (prev < 80) {
+          return 95;
         }
-        return prev;
+        return 100;
       });
     }, 1000);
 
@@ -20,9 +22,14 @@ export default function ProgressPage() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center font-bold">
-      This is a progress page
+    <div className="flex flex-col w-full h-full items-center justify-center font-bold space-y-4">
+      <span>This is a progress page</span>
+
       <Progress value={progress} className="w-[60%]" />
+
+      {progress >= 100 && (
+        <span>{`Now, visit "Payment" tab, and re-visit this page`}</span>
+      )}
     </div>
   );
 }

@@ -5,30 +5,55 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
 } from "@/app/components/shadcn/alert-dialog";
 
+import { Progress } from "@/app/components/shadcn/progress";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import ProgressPage from "../../../progress/page";
 
 export default function PaymentProgress() {
   const router = useRouter();
-  const [open, setOpen] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!open) router.replace("/playground/route_interception/payment");
-  }, [open]);
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 30) {
+          return 30;
+        } else if (prev < 80) {
+          return 85;
+        }
+        return 100;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog defaultOpen>
       <AlertDialogContent className="flex flex-col items-center justify-center">
         <AlertDialogTitle>
-          You are viewing this page because you came from payment page
+          {`This progress page has been implemented with NextJS' parallel routing and intercepting routing technique.`}
         </AlertDialogTitle>
-        <ProgressPage />
+
+        <AlertDialogHeader>
+          You are viewing this page because you came from payment page
+        </AlertDialogHeader>
+
+        <Progress value={progress} className="w-[60%]" />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel
+            onClick={() => {
+              router.back();
+            }}
+          >
+            Close
+          </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

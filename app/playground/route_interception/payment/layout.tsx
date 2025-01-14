@@ -6,7 +6,7 @@ export default function RouteInterceptionPaymentLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <div className="flex h-[100dvh]">
+    <div className="flex w-full flex-col">
       {children}
       {modal}
     </div>

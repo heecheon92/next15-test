@@ -19,6 +19,9 @@ export default function Home() {
       <Link href="/playground/tanstack" className={linkClassname}>
         Tanstack
       </Link>
+      <Link href="/playground/route_interception" className={linkClassname}>
+        Route Interception
+      </Link>
     </div>
   );
 }

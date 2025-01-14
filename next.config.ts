@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         source: "/playground",
         destination: "/playground/automemo",
         permanent: true,
+      },
+      {
+        source: "/playground/route_interception",
+        destination: "/playground/route_interception/home",
+        permanent: true,
       }
     ]
   }

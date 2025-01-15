@@ -25,6 +25,7 @@ export default function RouteInterceptionLayout({
           <Link
             href="/playground/route_interception/progress"
             className="p-2 bg-blue-600 text-white rounded-md"
+            prefetch={false}
           >
             Progress
           </Link>

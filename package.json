@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "dev:turbo": "NODE_OPTIONS='--inspect' next dev --turbopack",
+    "dev:secure": "NODE_OPTIONS='--inspect' next dev --turbopack --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

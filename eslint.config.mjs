@@ -58,6 +58,22 @@ const eslintConfig = [
           argsIgnorePattern: "^_",
         },
       ],
+      "import/no-default-export": "error",
+    },
+  },
+  {
+    files: [
+      "eslint.config.mjs",
+
+      /* Exclude NextJS special files */
+      "**/page.{jsx,tsx}",
+      "**/layout.{jsx,tsx}",
+      "**/loading.{jsx,tsx}",
+      "**/template.{jsx,tsx}",
+      "**/default.{jsx,tsx}",
+    ],
+    rules: {
+      "import/no-default-export": "off",
     },
   },
 ];

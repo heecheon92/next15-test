@@ -2,9 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
   async redirects() {
     return [
       {
@@ -16,9 +14,9 @@ const nextConfig: NextConfig = {
         source: "/playground/route_interception",
         destination: "/playground/route_interception/home",
         permanent: true,
-      }
-    ]
-  }
+      },
+    ];
+  },
 };
 
 export default nextConfig;
